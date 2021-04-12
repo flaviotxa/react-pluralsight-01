@@ -17,7 +17,7 @@ export default function useFetch(url) {
           const json = await response.json();
           if (isMounted.current) setData(json);
         } else {
-          throw response
+          throw response;
         }
       } catch (e) {
         if (isMounted.current) setError(e);
@@ -29,8 +29,13 @@ export default function useFetch(url) {
 
     return () => {
       isMounted.current = false;
-    } 
+    };
   }, [url]);
 
   return { data, error, loading };
+}
+
+export function Fetch({ url, render }) {
+  const { data, loading, error } = useFetch(url);
+  return render(data, loading, error);
 }

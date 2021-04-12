@@ -4,11 +4,13 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Products from "./Products";
 import { Routes, Route } from "react-router-dom";
-import Detail from "./Detail";
+import Detail from "./Detail.class";
 import Cart from "./Cart";
-import Checkout from "./Checkout";
+import Checkout from "./Checkout.class";
+import { useCart } from "./cartContext";
 
 export default function App() {
+  const { dispatch } = useCart();
   return (
     <>
       <div className="content">
@@ -24,7 +26,7 @@ export default function App() {
             <Route path="/cart" element={<Cart />} />
             <Route
               path="/checkout"
-              element={<Checkout />}
+              element={<Checkout dispatch={dispatch}/>}
             />
           </Routes>
         </main>
